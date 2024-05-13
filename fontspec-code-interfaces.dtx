@@ -21,11 +21,41 @@
 % Defines the standard rm/sf/tt font families with specified options and font name/file.
 % \end{function}
 %
+% \begin{function}{\setmathrm,\setboldmathrm,\setmathsf,\setmathtt}
+% \begin{syntax}
+% |\setmathrm| \oarg{options} \marg{font name/file} \oarg{options}
+% \end{syntax}
+% Defines the standard |\mathrm|/|sf|/|tt| font families with specified options and font name/file.
+% |\setboldmathrm| sets the |\mathrm| font when |\boldmath| is active.
+% \end{function}
+%
 % \begin{function}{\setromanfont}
 % \begin{syntax}
 % |\setromanfont| \oarg{options} \marg{font name/file} \oarg{options}
 % \end{syntax}
 % Deprecated alias for |\setmainfont|.
+% \end{function}
+%
+% \begin{function}{\newfontfamily,\renewfontfamily,\setfontfamily,\providefontfamily}
+% \begin{syntax}
+% |\setromanfont| \meta{font switch cs} \oarg{options} \marg{font name/file} \oarg{options}
+% \end{syntax}
+% Defines font family as specified, activated using the \meta{font switch cs}.
+% \end{function}
+%
+% \begin{function}{\newfontface,\renewfontface,\setfontface,\providefontface}
+% \begin{syntax}
+% |\setromanfont| \meta{font switch cs} \oarg{options} \marg{font name/file} \oarg{options}
+% \end{syntax}
+% Defines font family as specified, activated using the \meta{font switch cs}.
+% Only the exact font specified will be defined, without attempting to find bold/italic/etc.\ shapes.
+% \end{function}
+%
+% \begin{function}{\oldstylenums,\liningnums}
+% \begin{syntax}
+% |{\oldstylenums 123} {\liningnums 123}| $\to$  {\rmfamily\oldstylenums 123} {\rmfamily\liningnums 123}
+% \end{syntax}
+% Re-implementations of font-switching commands which activate the necessaru font features (|onum| and |lnum| in OpenType).
 % \end{function}
 %
 % \section{Implementation}
@@ -72,6 +102,7 @@
 %    \end{macrocode}
 % \end{macro}
 %
+% \begin{macro}{\setmathrm,\setboldmathrm,\setmathsf,\setmathtt}
 %    \begin{macrocode}
 \NewDocumentCommand \setmathrm { O{} m O{} }
   {
@@ -99,6 +130,7 @@
     \@@_main_setmathtt:nn {#1,#3} {#2}
   }
 %    \end{macrocode}
+% \end{macro}
 %
 % \begin{macro}{\setromanfont}
 % This is the old name for \cs{setmainfont}, retained \emph{ad infinitum}
@@ -111,6 +143,7 @@
 %    \end{macrocode}
 % \end{macro}
 %
+% \begin{macro}{\newfontfamily,\renewfontfamily,\setfontfamily,\providefontfamily}
 %    \begin{macrocode}
 \NewDocumentCommand \newfontfamily { m O{} m O{} }
   {
@@ -138,7 +171,9 @@
     \@@_main_newfontfamily:NnnN #1 {#2,#4} {#3} \ProvideDocumentCommand
   }
 %    \end{macrocode}
+% \end{macro}
 %
+% \begin{macro}{\newfontface,\renewfontface,\setfontface,\providefontface}
 %    \begin{macrocode}
 \NewDocumentCommand \newfontface { m O{} m O{} }
   {
@@ -166,6 +201,7 @@
     \@@_main_newfontface:NnnN #1 {#2,#4} {#3} \ProvideDocumentCommand
   }
 %    \end{macrocode}
+% \end{macro}
 %
 % \begin{macro}{\defaultfontfeatures}
 %   This macro takes one argument that consists of all of feature
