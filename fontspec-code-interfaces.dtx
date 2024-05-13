@@ -7,12 +7,36 @@
 % commands are contained herein; they all use or define macros which
 % are defined or used later on in \vref{sec:codeinternal}.
 %
+% \begin{function}{\fontspec}
+% \begin{syntax}
+% |\fontspec| \oarg{options} \marg{font name/file} \oarg{options}
+% \end{syntax}
+% Defines a dummy font with specified options and font name/file.
+% \end{function}
+%
+% \begin{function}{\setmainfont,\setsansfont,\setmonofont}
+% \begin{syntax}
+% |\setmainfont| \oarg{options} \marg{font name/file} \oarg{options}
+% \end{syntax}
+% Defines the standard rm/sf/tt font families with specified options and font name/file.
+% \end{function}
+%
+% \begin{function}{\setromanfont}
+% \begin{syntax}
+% |\setromanfont| \oarg{options} \marg{font name/file} \oarg{options}
+% \end{syntax}
+% Deprecated alias for |\setmainfont|.
+% \end{function}
+%
+% \section{Implementation}
+%
 % \iffalse
 %    \begin{macrocode}
 %<*fontspec>
 %    \end{macrocode}
 % \fi
 %
+% \begin{macro}{\fontspec}
 %    \begin{macrocode}
 \NewDocumentCommand \fontspec { O{} m O{} }
   {
@@ -20,7 +44,9 @@
     \ignorespaces
   }
 %    \end{macrocode}
+% \end{macro}
 %
+% \begin{macro}{\setmainfont,\setsansfont,\setmonofont}
 %    \begin{macrocode}
 \NewDocumentCommand \setmainfont { O{} m O{} }
   {
@@ -44,6 +70,7 @@
     \ignorespaces
   }
 %    \end{macrocode}
+% \end{macro}
 %
 %    \begin{macrocode}
 \NewDocumentCommand \setmathrm { O{} m O{} }
